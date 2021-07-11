@@ -23,7 +23,6 @@ namespace NxNTicTacToe
         public int playerTurn = 1;
         public int dimension;
 
-        //public List<int> board { get; set; }
         public IDictionary<(int, int), string> dictionaryBoard { get; set; }
 
         /// <summary>
@@ -37,7 +36,6 @@ namespace NxNTicTacToe
 
             int numberOfButtons = n * n;
 
-            //board = new List<int>();
             dictionaryBoard = new Dictionary<(int, int), string>();
 
             for (int i = 1; i < numberOfButtons + 1; i++)
@@ -52,8 +50,6 @@ namespace NxNTicTacToe
 
                 newButton.Tag = $"{rowNumber}:{columnNumber}";
 
-                //board.Add(i - 1);
-
                 dictionaryBoard.Add(new KeyValuePair<(int, int), string>((rowNumber, columnNumber), ""));
 
                 newButton.Click += NewButton_Click;
@@ -67,10 +63,6 @@ namespace NxNTicTacToe
             Button button = sender as Button;
 
             button.Content = playerTurn == 1 ? "X" : "O";
-
-            //int buttonIndex = Convert.ToInt32(button.Name.Replace("btn", ""));
-            //int rowNumber = 1 + ((buttonIndex - 1) / dimension);
-            //int columnNumber = 1 + (buttonIndex - 1) % dimension;
 
             int rowNumber = Convert.ToInt32(button.Tag.ToString().Split(":")[0]);
             int columnNumber = Convert.ToInt32(button.Tag.ToString().Split(":")[1]);
