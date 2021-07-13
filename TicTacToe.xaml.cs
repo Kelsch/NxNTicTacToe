@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,8 +105,33 @@ namespace NxNTicTacToe
 
             int n = Convert.ToInt32(Math.Sqrt(dictionaryBoard.Count));
 
-            // Check for columns in row
-            for (int r = 1; r <= n; r++)
+            winningPlayer = RowCheck(n, winningValue);
+            if (winningPlayer != 0)
+            {
+                return winningPlayer;
+            }
+
+            winningPlayer = ColumnCheck(n, winningValue);
+            if (winningPlayer != 0)
+            {
+                return winningPlayer;
+            }
+
+            winningPlayer = DiagnalLeftToRightCheck(n, winningValue);
+            if (winningPlayer != 0)
+            {
+                return winningPlayer;
+            }
+
+            winningPlayer = DiagnalRightToLeftCheck(n, winningValue);
+
+            return winningPlayer;
+        }
+
+        private int RowCheck(int n, string winningValue)
+        {
+            int winningPlayer = 0;
+            for(int r = 1; r <= n; r++)
             {
                 int columnsInRow = 0;
                 for (int c = 1; c <= n; c++)
@@ -115,7 +141,7 @@ namespace NxNTicTacToe
                         columnsInRow += 1;
                     }
 
-                    // return if a player has all the columns in that row
+                    // return if a player has all the rows in that column
                     if (columnsInRow == n)
                     {
                         winningPlayer = playerTurn;
@@ -124,7 +150,12 @@ namespace NxNTicTacToe
                 }
             }
 
-            // Check for rows in column
+            return winningPlayer;
+        }
+
+        private int ColumnCheck(int n, string winningValue)
+        {
+            int winningPlayer = 0;
             for (int c = 1; c <= n; c++)
             {
                 int rowsInColumn = 0;
@@ -135,7 +166,7 @@ namespace NxNTicTacToe
                         rowsInColumn += 1;
                     }
 
-                    // return if a player has all the rows in that column
+                    // return if a player has all the columns in that row
                     if (rowsInColumn == n)
                     {
                         winningPlayer = playerTurn;
@@ -144,7 +175,12 @@ namespace NxNTicTacToe
                 }
             }
 
-            // Check for diagnal left to right win
+            return winningPlayer;
+        }
+
+        private int DiagnalLeftToRightCheck(int n, string winningValue)
+        {
+            int winningPlayer = 0;
             int diagnalLeftToRightCount = 0;
             for (int i = 1; i <= n; i++)
             {
@@ -161,7 +197,12 @@ namespace NxNTicTacToe
                 }
             }
 
-            // Check for diagnal right to left win
+            return winningPlayer;
+        }
+
+        private int DiagnalRightToLeftCheck(int n, string winningValue)
+        {
+            int winningPlayer = 0;
             int diagnalRightToLeftCount = 0;
             for (int i = 1; i <= n; i++)
             {
