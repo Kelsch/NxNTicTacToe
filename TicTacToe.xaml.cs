@@ -63,6 +63,7 @@ namespace NxNTicTacToe
             Button button = sender as Button;
 
             button.Content = playerTurn == 1 ? "X" : "O";
+            button.IsEnabled = false;
 
             int rowNumber = Convert.ToInt32(button.Tag.ToString().Split(":")[0]);
             int columnNumber = Convert.ToInt32(button.Tag.ToString().Split(":")[1]);
